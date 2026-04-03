@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room {{ room.room_code }} — Tic-Tac-Toe</title>
+    <link rel="stylesheet" href="{% static 'game/css/style.css' %}">
+</head>
+<body>
+    <div class="container game-container">
+        <header class="game-header">
+            <a href="{% url 'index' %}" class="back-link">&larr; Home</a>
+            <h1 class="title">Tic-Tac-Toe</h1>
+        </header>
+
+        <!-- Room Info Bar -->
+        <div class="info-bar">
+            <div class="room-info">
+                <span class="label">Room</span>
+                <span class="room-code" id="room-code">{{ room.room_code }}</span>
+                <button class="btn-icon" id="copy-code" title="Copy room code">📋</button>
+            </div>
+            <div class="player-info">
+                <span class="label">You are</span>
+                <span class="player-symbol" id="player-symbol">—</span>
+            </div>
+            <div class="mode-info">
+                <span class="label">Mode</span>
+                <span id="game-mode">{{ room.get_game_mode_display }}</span>
+            </div>
+        </div>
+
+        <!-- Status Banner -->
+        <div class="status-banner" id="status-banner">
+            <span id="status-text">Connecting...</span>
+        </div>
+
+        <!-- Game Board -->
+        <div class="board" id="board">
+            <button class="cell" data-index="0"></button>
+            <button class="cell" data-index="1"></button>
+            <button class="cell" data-index="2"></button>
+            <button class="cell" data-index="3"></button>
+            <button class="cell" data-index="4"></button>
+            <button class="cell" data-index="5"></button>
+            <button class="cell" data-index="6"></button>
+            <button class="cell" data-index="7"></button>
+            <button class="cell" data-index="8"></button>
+        </div>
+
+        <!-- Controls -->
+        <div class="controls">
+            <button class="btn btn-primary" id="reset-btn" style="display:none;">Play Again</button>
+        </div>
+
+        <footer class="footer">
+            <p>Built with Django Channels &amp; WebSockets</p>
+        </footer>
+    </div>
+
+    <script>
+        const ROOM_CODE = "{{ room.room_code }}";
+    </script>
+    <script src="{% static 'game/js/game.js' %}"></script>
+</body>
+</html>
